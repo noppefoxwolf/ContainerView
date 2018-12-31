@@ -5,6 +5,8 @@
 
 ## Embed Content
 
+Support UIView, UIViewController.(and customizable more yourself.)
+
 ```swift
 
 class ViewController: UIViewController, Embedable {}
