@@ -9,7 +9,7 @@ import UIKit
 
 public protocol Embedable {
   
-  func embed(to: UIView, parent: UIViewController, contentStorage: inout Optional<Self>)
+  func embed(to: UIView, parent: UIViewController)
   
   @discardableResult
   func digUp(from: UIView) -> Self?
@@ -17,7 +17,7 @@ public protocol Embedable {
 
 extension Embedable where Self: UIViewController {
   
-  public func embed(to: UIView, parent: UIViewController, contentStorage: inout Optional<Self>) {
+  public func embed(to: UIView, parent: UIViewController) {
     digUp(from: to)
     
     willMove(toParent: parent)
@@ -33,7 +33,6 @@ extension Embedable where Self: UIViewController {
     
     parent.addChild(self)
     didMove(toParent: parent)
-    contentStorage = self
   }
   
   @discardableResult
@@ -47,7 +46,7 @@ extension Embedable where Self: UIViewController {
 
 extension Embedable where Self: UIView {
   
-  public func embed(to: UIView, parent: UIViewController, contentStorage: inout Optional<Self>) {
+  public func embed(to: UIView, parent: UIViewController) {
     digUp(from: to)
     
     translatesAutoresizingMaskIntoConstraints = false
@@ -57,7 +56,7 @@ extension Embedable where Self: UIView {
       leftAnchor.constraint(equalTo: to.leftAnchor),
       rightAnchor.constraint(equalTo: to.rightAnchor),
       bottomAnchor.constraint(equalTo: to.bottomAnchor),
-      ])
+    ])
   }
   
   @discardableResult
@@ -71,7 +70,8 @@ final public class ContainerView<T: Embedable>: UIView {
   public private(set) var content: T? = nil
   
   public func embed(_ content: T, parent: UIViewController) {
-    content.embed(to: self, parent: parent, contentStorage: &self.content)
+    content.embed(to: self, parent: parent)
+    self.content = content
   }
   
   public func digUp() {
