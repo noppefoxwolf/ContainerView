@@ -50,7 +50,7 @@ extension Embedable where Self: UIView {
     digUp(from: to)
     
     translatesAutoresizingMaskIntoConstraints = false
-    addSubview(self)
+    to.addSubview(self)
     NSLayoutConstraint.activate([
       topAnchor.constraint(equalTo: to.topAnchor),
       leftAnchor.constraint(equalTo: to.leftAnchor),
