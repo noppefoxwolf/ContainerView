@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "ContainerView",
+    name: "Container",
     platforms: [.iOS(.v13)],
     products: [
         .library(
