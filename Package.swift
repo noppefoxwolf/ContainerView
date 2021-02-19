@@ -9,7 +9,7 @@ let package = Package(
     products: [
         .library(
             name: "Container",
-            targets: ["ContainerView"]
+            targets: ["Container"]
         ),
     ],
     dependencies: [
@@ -17,7 +17,8 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "ContainerView"
+            name: "Container",
+            path: "Sources/ContainerView"
         )
     ]
 )
