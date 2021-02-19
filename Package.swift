@@ -8,7 +8,7 @@ let package = Package(
     platforms: [.iOS(.v13)],
     products: [
         .library(
-            name: "ContainerView",
+            name: "Container",
             targets: ["ContainerView"]
         ),
     ],
