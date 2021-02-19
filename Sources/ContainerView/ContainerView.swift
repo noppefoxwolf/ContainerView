@@ -15,9 +15,9 @@ public protocol Embedable {
   func digUp(from: UIView) -> Self?
 }
 
-extension Embedable where Self: UIViewController {
+public extension Embedable where Self: UIViewController {
   
-  public func embed(to: UIView, parent: UIViewController) {
+  func embed(to: UIView, parent: UIViewController) {
     digUp(from: to)
     
     willMove(toParent: parent)
@@ -36,7 +36,7 @@ extension Embedable where Self: UIViewController {
   }
   
   @discardableResult
-  public func digUp(from: UIView) -> Self? {
+  func digUp(from: UIView) -> Self? {
     willMove(toParent: nil)
     from.subviews.forEach({ $0.removeFromSuperview() })
     removeFromParent()
@@ -44,9 +44,9 @@ extension Embedable where Self: UIViewController {
   }
 }
 
-extension Embedable where Self: UIView {
+public extension Embedable where Self: UIView {
   
-  public func embed(to: UIView, parent: UIViewController) {
+  func embed(to: UIView, parent: UIViewController) {
     digUp(from: to)
     
     translatesAutoresizingMaskIntoConstraints = false
@@ -60,7 +60,7 @@ extension Embedable where Self: UIView {
   }
   
   @discardableResult
-  public func digUp(from: UIView) -> Self? {
+  func digUp(from: UIView) -> Self? {
     removeFromSuperview()
     return self
   }
